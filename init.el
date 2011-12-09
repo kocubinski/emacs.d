@@ -18,6 +18,8 @@
                       slime
                       slime-repl
                       rainbow-delimiters
+                      python-mode
+                      ipython
                      )
    "A list of packages to ensure are installed at launch.")
 
@@ -95,3 +97,8 @@
 
 (require 'init-evil)
 ;(require 'init-auto-complete)
+
+;; python support
+;(require 'python_mode)
+(add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;(require 'ipython)
