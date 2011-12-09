@@ -7,6 +7,9 @@
   (package-refresh-contents))
 
 ;; Add in your own as you wish:
+;; These wouldn't load on windows:
+;; auto-complete
+;; ac-slime
 (defvar my-packages '(starter-kit
                       starter-kit-lisp
                       starter-kit-bindings
@@ -15,8 +18,6 @@
                       slime
                       slime-repl
                       rainbow-delimiters
-                      auto-complete
-                      ac-slime
                      )
    "A list of packages to ensure are installed at launch.")
 
@@ -26,7 +27,7 @@
 
 ;(set-face-attribute 'default nil :font "Bitstream Vera Sans Mono-13")
 (if (eq system-type 'windows-nt) 
-    (set-face-attribute 'default nil :font "Consolas-14")
+    (set-face-attribute 'default nil :font "Consolas-11")
     (set-face-attribute 'default nil :font "Inconsolata-15"))
 
 (defun sweyla665742 ()
@@ -54,9 +55,9 @@
      (font-lock-type-face ((t (:foreground "#00F8DE"))))
      )))
 
-(provide 'sweyla665742)
+;(provide 'sweyla665742)
 
-(load-theme 'manoj-dark)
+;(load-theme 'manoj-dark)
 
 (global-set-key (kbd "C-,") 'other-window)
 (global-set-key (kbd "C-<") 'previous-buffer)
@@ -93,4 +94,4 @@
 (add-to-list 'load-path dotfiles-dir)
 
 (require 'init-evil)
-(require 'init-auto-complete)
+;(require 'init-auto-complete)
