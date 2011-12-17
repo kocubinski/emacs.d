@@ -10,14 +10,15 @@
 ;; These wouldn't load on windows:
 ;; auto-complete
 ;; ac-slime
+;; starter-kit-lisp
+;; starter-kit-bindings
+;; undo-tree
+;; clojure-mode
+;; slime
+;; slime-repl
+;; rainbow-delimiters
+
 (defvar my-packages '(starter-kit
-                      starter-kit-lisp
-                      starter-kit-bindings
-                      undo-tree
-                      clojure-mode
-                      slime
-                      slime-repl
-                      rainbow-delimiters
                      )
    "A list of packages to ensure are installed at launch.")
 
@@ -95,3 +96,5 @@
 
 (require 'init-evil)
 ;(require 'init-auto-complete)
+
+(load-file "~/.emacs.d/emacs-for-python/epy-init.el")
