@@ -1,6 +1,9 @@
 [submodule "evil"]
 	path = evil
 	url = git://gitorious.org/evil/evil.git
-[submodule "evil-surround"]
-	path = evil-surround
-	url = https://github.com/timcharper/evil-surround.git
+[submodule "emacs-for-python"]
+	path = emacs-for-python
+	url = git://github.com//gabrielelanaro/emacs-for-python.git
+[submodule "zencoding"]
+	path = zencoding
+	url = https://github.com/rooney/zencoding.git
