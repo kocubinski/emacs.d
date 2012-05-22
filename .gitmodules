@@ -1,0 +1,12 @@
+[submodule "coffee-mode"]
+	path = coffee-mode
+	url = git://github.com/defunkt/coffee-mode.git
+[submodule "evil"]
+	path = evil
+	url = git://gitorious.org/evil/evil.git
+[submodule "less-css-mode"]
+	path = less-css-mode
+	url = git://github.com/purcell/less-css-mode.git
+[submodule "zencoding"]
+	path = zencoding
+	url = git://github.com/rooney/zencoding.git
