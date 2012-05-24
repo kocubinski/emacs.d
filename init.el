@@ -84,6 +84,7 @@
       (file-name-directory (file-truename load-file-name))))
 
 (require 'init-evil)
+(require 'init-auto-complete)
 (require 'auto-complete)
 (require 'mwe-color-box)
 (require 'visual-basic-mode)
@@ -117,3 +118,11 @@
  )
 
 (setq inferior-lisp-program "script/repl")
+
+(defun inf-lisp-switch-ns ()
+ (interactive)
+ (save-excursion
+   (beginning-of-buffer)
+   (lisp-eval-defun)))
+
+(define-key inferior-lisp-mode-map "\C-c\C-n" 'inf-lisp-switch-ns)
