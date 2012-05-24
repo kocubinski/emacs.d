@@ -24,6 +24,7 @@
 ;(set-background-color "#fafafa")
 ;(set-face-attribute 'default nil :font "Inconsolata-14")
 (set-face-attribute 'default nil :font "Dejavu Sans Mono-11:antialias=true:autohint=slight:hinting=true")
+;(set-face-attribute 'default nil :font "Monospace-12:antialias=true:autohint=slight:hinting=true")
 ;(set-face-attribute 'default nil :font "Dejavu Sans Mono-11:antialias=true:autohint=slight:hinting=true")
 ;(set-face-attribute 'default nil :font "Monaco-11:antialias=true:autohint=slight:hinting=true")
 ;(set-face-attribute 'default nil :font "Inconsolata-15:autohint=slight;antialias=true;")
@@ -110,6 +111,11 @@
 
 (require 'clojure-mode)
 (add-hook 'slime-repl-mode-hook 'clojure-mode-font-lock-setup)
+
+(require 'auto-complete)
+(add-hook 'clojure-mode-hook
+          (lambda() (auto-complete-mode 1)))
+
 (add-to-list 'auto-mode-alist '("\.cljs$" . clojure-mode))
 
 ;; coffee-mode
@@ -162,3 +168,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
 )
+
+(setq inferior-lisp-program "lein trampoline cljsbuild repl-listen")
