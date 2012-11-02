@@ -56,9 +56,8 @@
 ;(set-face-attribute 'default nil :font "Bitstream Vera Sans Mono-13")
 (when (display-graphic-p)
   (if (eq system-type 'windows-nt) 
-      (set-face-attribute 'default nil :font "Consolas-14")
+      (set-face-attribute 'default nil :font "Consolas-13")
     (set-face-attribute 'default nil :font "Inconsolata-15")))
-
 
 (global-set-key (kbd "C-,") 'other-window)
 (global-set-key (kbd "C-<") 'previous-buffer)
@@ -109,9 +108,10 @@
 (define-key evil-normal-state-map (kbd "C-M-d") 'paredit-forward-down)
 (define-key evil-normal-state-map (kbd "M-d") 'paredit-forward-kill-word)
 
-(require 'window-numbering)
-(window-numbering-mode 1)
-
+;; window numbering mode allows M-<Number Key> to move to a specific window in emacs.
+;; disabled for now because it conflicts my Dexpot (virtual desktop) bindings.
+;(require 'window-numbering)
+;(window-numbering-mode 1)
 
 (require 'moz)
 (autoload 'moz-minor-mode "moz" "Mozilla Minor and Inferior Mozilla Modes" t)
