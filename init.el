@@ -164,3 +164,5 @@
 (setq evil-normal-state-cursor '("SeaGreen4" box))
 (setq evil-insert-state-cursor '("SeaGreen3" bar))
 (setq evil-emacs-state-cursor '("red" box))
+
+(add-to-list 'load-path "~/.emacs.d/zencoding")
