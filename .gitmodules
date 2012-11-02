@@ -1,6 +1,3 @@
 [submodule "evil"]
 	path = evil
 	url = git://gitorious.org/evil/evil.git
-[submodule "evil-surround"]
-	path = evil-surround
-	url = https://github.com/timcharper/evil-surround.git
