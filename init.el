@@ -1,3 +1,5 @@
+;; packages
+
 (require 'package)
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
@@ -24,6 +26,20 @@
 (dolist (p my-packages)
     (when (not (package-installed-p p))
         (package-install p)))
+
+(add-to-list 'load-path "~/.emacs.d/zencoding")
+(add-to-list 'load-path "~/.emacs.d/tree")
+
+(require 'zencoding-mode)
+(require 'tree-mode)
+(require 'windata)
+(require 'dirtree)
+
+(autoload 'dirtree "dirtree" "Add directory to tree view" t)
+(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
+(autoload 'tags-tree "tags-tree" "TAGS tree" t)
+
+;; mode hooks
 
 (add-hook 'clojure-mode-hook
           (lambda ()
@@ -58,6 +74,7 @@
   (if (eq system-type 'windows-nt) 
       (set-face-attribute 'default nil :font "Consolas-13")
     (set-face-attribute 'default nil :font "Inconsolata-15")))
+
 
 (global-set-key (kbd "C-,") 'other-window)
 (global-set-key (kbd "C-<") 'previous-buffer)
@@ -165,4 +182,3 @@
 (setq evil-insert-state-cursor '("SeaGreen3" bar))
 (setq evil-emacs-state-cursor '("red" box))
 
-(add-to-list 'load-path "~/.emacs.d/zencoding")

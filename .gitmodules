@@ -3,7 +3,7 @@
 	url = git://gitorious.org/evil/evil.git
 [submodule "emacs-for-python"]
 	path = emacs-for-python
-	url = https://github.com/gabrielelanaro/emacs-for-python.git
+	url = https://github.com/gabrielelanaro/emacs-for-python
 [submodule "zencoding"]
 	path = zencoding
 	url = https://github.com/rooney/zencoding
