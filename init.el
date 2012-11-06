@@ -27,13 +27,20 @@
     (when (not (package-installed-p p))
         (package-install p)))
 
+(if load-file-name
+   (add-to-list 
+      'load-path 
+      (file-name-directory (file-truename load-file-name))))
 (add-to-list 'load-path "~/.emacs.d/zencoding")
 (add-to-list 'load-path "~/.emacs.d/tree")
 
 (require 'zencoding-mode)
-(require 'tree-mode)
 (require 'windata)
+(require 'tree-mode)
 (require 'dirtree)
+(require 'init-evil)
+(require 'init-auto-complete)
+(require 'mwe-color-box)
 
 (autoload 'dirtree "dirtree" "Add directory to tree view" t)
 (autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
@@ -105,15 +112,6 @@
       (when (looking-at "^    ")
         (replace-match "")))))
 
-(if load-file-name
-   (add-to-list 
-      'load-path 
-      (file-name-directory (file-truename load-file-name))))
-
-(require 'init-evil)
-(require 'init-auto-complete)
-(require 'mwe-color-box)
-
 (define-key evil-normal-state-map (kbd "M-h") 'windmove-left)
 (define-key evil-normal-state-map (kbd "M-j") 'windmove-down)
 (define-key evil-normal-state-map (kbd "M-k") 'windmove-up)
@@ -143,7 +141,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("a7e8dc00fc8043439a738a15e2f593b8e9b2492f" "71b172ea4aad108801421cc5251edb6c792f3adbaecfa1c52e94e3d99634dee7" "b7553781f4a831d5af6545f7a5967eb002c8daeee688c5cbf33bf27936ec18b3" "965234e8069974a8b8c83e865e331e4f53ab9e74" default))))
+ '(custom-safe-themes (quote ("24d3369f5a236ea822bb4f786fe923d730dc070c" "a7e8dc00fc8043439a738a15e2f593b8e9b2492f" "71b172ea4aad108801421cc5251edb6c792f3adbaecfa1c52e94e3d99634dee7" "b7553781f4a831d5af6545f7a5967eb002c8daeee688c5cbf33bf27936ec18b3" "965234e8069974a8b8c83e865e331e4f53ab9e74" default))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
