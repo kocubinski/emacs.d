@@ -20,6 +20,7 @@
                       rainbow-delimiters
                       auto-complete
                       ac-slime
+                      nrepl
                       zenburn-theme)
    "A list of packages to ensure are installed at launch.")
 
@@ -41,6 +42,7 @@
 (require 'init-evil)
 (require 'init-auto-complete)
 (require 'mwe-color-box)
+(require 'nrepl)
 
 (autoload 'dirtree "dirtree" "Add directory to tree view" t)
 (autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
@@ -58,10 +60,13 @@
           (lambda ()
             (auto-complete-mode 1)))
 
-(add-hook 'slime-repl-mode-hook
-          (defun clojure-mode-slime-font-lock ()
-            (let (font-lock-mode)
-              (clojure-mode-font-lock-setup))))
+(add-hook 'nrepl-interaction-mode-hook
+          'nrepl-turn-on-eldoc-mode)
+
+;; (add-hook 'slime-repl-mode-hook
+;;           (defun clojure-mode-slime-font-lock ()
+;;             (let (font-lock-mode)
+;;               (clojure-mode-font-lock-setup))))
 
 (defun inf-lisp-switch-ns ()
   (interactive)
@@ -175,8 +180,16 @@
 
 ;(require 'auto-save)
 
-(set-face-background 'modeline "dark slate blue")
+(set-face-background 'mode-line "dark slate blue")
 (setq evil-normal-state-cursor '("SeaGreen4" box))
 (setq evil-insert-state-cursor '("SeaGreen3" bar))
 (setq evil-emacs-state-cursor '("red" box))
 
+;; I manually set this when editing clojure "markdown-ish" buffers,
+;; i.e. those used for misaki.
+(make-face 'clojure-md-string-face)
+(set-face-foreground 'clojure-md-string-face "PowderBlue")
+
+(defun clojure-md-color ()
+  (interactive)
+  (set (make-local-variable 'font-lock-string-face) 'clojure-md-string-face))
