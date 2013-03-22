@@ -14,36 +14,58 @@
                       starter-kit-bindings
                       undo-tree
                       clojure-mode
-                      clojure-test-mode
                       clojurescript-mode
-                      slime-repl
                       rainbow-delimiters
                       auto-complete
                       ac-slime
-                      zenburn-theme)
+                      zenburn-theme
+                      js2-mode)
    "A list of packages to ensure are installed at launch.")
 
 (dolist (p my-packages)
     (when (not (package-installed-p p))
         (package-install p)))
 
+(if load-file-name
+   (add-to-list 
+      'load-path 
+      (file-name-directory (file-truename load-file-name))))
+
 (add-to-list 'load-path "~/.emacs.d/zencoding")
 (add-to-list 'load-path "~/.emacs.d/tree")
+(add-to-list 'load-path "~/.emacs.d/slime")
+(add-to-list 'load-path "~/.emacs.d/slime/contrib")
+(add-to-list 'load-path "~/.emacs.d/slime-js")
 
+(require 'init-evil)
+(require 'init-auto-complete)
+(require 'mwe-color-box)
 (require 'zencoding-mode)
-(require 'tree-mode)
-(require 'windata)
-(require 'dirtree)
+;(require 'tree-mode)
+;(require 'windata)
+;(require 'dirtree)
+(require 'slime)
+(require 'slime-js)
+(require 'slime-repl)
+(require 'slime-fancy)
+(slime-setup '(slime-repl slime-fancy slime-js))
 
-(autoload 'dirtree "dirtree" "Add directory to tree view" t)
-(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
-(autoload 'tags-tree "tags-tree" "TAGS tree" t)
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(global-set-key [f5] 'slime-js-reload)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (slime-js-minor-mode 1)))
+
+;(autoload 'dirtree "dirtree" "Add directory to tree view" t)
+;(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
+;(autoload 'tags-tree "tags-tree" "TAGS tree" t)
 
 ;; mode hooks
 
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (clojure-test-mode 1)
             (auto-complete-mode 1)))
 
 
@@ -51,10 +73,10 @@
           (lambda ()
             (auto-complete-mode 1)))
 
-(add-hook 'slime-repl-mode-hook
-          (defun clojure-mode-slime-font-lock ()
-            (let (font-lock-mode)
-              (clojure-mode-font-lock-setup))))
+;; (add-hook 'slime-repl-mode-hook
+;;           (defun clojure-mode-slime-font-lock ()
+;;             (let (font-lock-mode)
+;;               (clojure-mode-font-lock-setup))))
 
 (defun inf-lisp-switch-ns ()
   (interactive)
@@ -105,14 +127,6 @@
       (when (looking-at "^    ")
         (replace-match "")))))
 
-(if load-file-name
-   (add-to-list 
-      'load-path 
-      (file-name-directory (file-truename load-file-name))))
-
-(require 'init-evil)
-(require 'init-auto-complete)
-(require 'mwe-color-box)
 
 (define-key evil-normal-state-map (kbd "M-h") 'windmove-left)
 (define-key evil-normal-state-map (kbd "M-j") 'windmove-down)
