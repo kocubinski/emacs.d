@@ -7,3 +7,9 @@
 [submodule "zencoding"]
 	path = zencoding
 	url = https://github.com/rooney/zencoding
+[submodule "slime"]
+	path = slime
+	url = https://github.com/antifuchs/slime.git
+[submodule "slime-js"]
+	path = slime-js
+	url = https://github.com/swank-js/slime-js.git

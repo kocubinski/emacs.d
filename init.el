@@ -14,13 +14,12 @@
                       starter-kit-bindings
                       undo-tree
                       clojure-mode
-                      clojure-test-mode
                       clojurescript-mode
-                      slime-repl
                       rainbow-delimiters
                       auto-complete
                       ac-slime
                       nrepl
+                      js2-mode
                       zenburn-theme)
    "A list of packages to ensure are installed at launch.")
 
@@ -32,27 +31,46 @@
    (add-to-list 
       'load-path 
       (file-name-directory (file-truename load-file-name))))
+
 (add-to-list 'load-path "~/.emacs.d/zencoding")
 (add-to-list 'load-path "~/.emacs.d/tree")
+(add-to-list 'load-path "~/.emacs.d/slime")
+(add-to-list 'load-path "~/.emacs.d/slime/contrib")
+(add-to-list 'load-path "~/.emacs.d/slime-js")
 
+(require 'init-evil)
+(require 'init-auto-complete)
+(require 'mwe-color-box)
 (require 'zencoding-mode)
 (require 'windata)
 (require 'tree-mode)
+(require 'slime)
 (require 'dirtree)
 (require 'init-evil)
 (require 'init-auto-complete)
 (require 'mwe-color-box)
 (require 'nrepl)
+(require 'slime-js)
+(require 'slime-repl)
+(require 'slime-fancy)
+(slime-setup '(slime-repl slime-fancy slime-js))
 
-(autoload 'dirtree "dirtree" "Add directory to tree view" t)
-(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
-(autoload 'tags-tree "tags-tree" "TAGS tree" t)
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+
+(global-set-key [f5] 'slime-js-reload)
+(add-hook 'js2-mode-hook
+          (lambda ()
+            (slime-js-minor-mode 1)))
+
+;(autoload 'dirtree "dirtree" "Add directory to tree view" t)
+;(autoload 'imenu-tree "imenu-tree" "Imenu tree" t)
+;(autoload 'tags-tree "tags-tree" "TAGS tree" t)
 
 ;; mode hooks
 
 (add-hook 'clojure-mode-hook
           (lambda ()
-            (clojure-test-mode 1)
             (auto-complete-mode 1)))
 
 
