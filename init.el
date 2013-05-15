@@ -20,6 +20,9 @@
                       ac-slime
                       nrepl
                       js2-mode
+                      xml-rpc
+                      org2blog
+                      htmlize
                       zenburn-theme)
    "A list of packages to ensure are installed at launch.")
 
@@ -37,6 +40,7 @@
 (add-to-list 'load-path "~/.emacs.d/slime")
 (add-to-list 'load-path "~/.emacs.d/slime/contrib")
 (add-to-list 'load-path "~/.emacs.d/slime-js")
+(add-to-list 'load-path "~/.emacs.d/")
 
 (require 'init-evil)
 (require 'init-auto-complete)
@@ -52,6 +56,7 @@
 (require 'nrepl)
 (require 'slime-js)
 (require 'dos)
+(require 'htmlize)
 (slime-setup '(slime-js))
 
 (autoload 'js2-mode "js2-mode" nil t)
@@ -72,13 +77,17 @@
           (lambda ()
             (auto-complete-mode 1)))
 
-
 (add-hook 'inferior-lisp-mode-hook
           (lambda ()
             (auto-complete-mode 1)))
 
 (add-hook 'nrepl-interaction-mode-hook
           'nrepl-turn-on-eldoc-mode)
+
+(add-hook 'html-mode-hook
+          (lambda ()
+            (hl-line-mode 1)
+            (set-fill-column 95)))
 
 ;; (add-hook 'slime-repl-mode-hook
 ;;           (defun clojure-mode-slime-font-lock ()
@@ -163,7 +172,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes (quote ("24d3369f5a236ea822bb4f786fe923d730dc070c" "a7e8dc00fc8043439a738a15e2f593b8e9b2492f" "71b172ea4aad108801421cc5251edb6c792f3adbaecfa1c52e94e3d99634dee7" "b7553781f4a831d5af6545f7a5967eb002c8daeee688c5cbf33bf27936ec18b3" "965234e8069974a8b8c83e865e331e4f53ab9e74" default))))
+ '(custom-safe-themes (quote ("24d3369f5a236ea822bb4f786fe923d730dc070c" "a7e8dc00fc8043439a738a15e2f593b8e9b2492f" "71b172ea4aad108801421cc5251edb6c792f3adbaecfa1c52e94e3d99634dee7" "b7553781f4a831d5af6545f7a5967eb002c8daeee688c5cbf33bf27936ec18b3" "965234e8069974a8b8c83e865e331e4f53ab9e74" default)))
+ '(ispell-dictionary "english")
+ '(ispell-program-name "C:\\Program Files (x86)\\Aspell\\bin\\aspell.exe")
+ '(org-agenda-files (quote ("c:/dev/org/totalpro.org" "c:/dev/org/designer.org"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -211,7 +223,6 @@
   (interactive)
   (set (make-local-variable 'font-lock-string-face) 'clojure-md-string-face))
 
-
 ;; After js2 has parsed a js file, we look for jslint globals decl
 ;; comment ("/* global Fred, _, Harry */") and add any symbols to a
 ;; buffer-local var of acceptable global vars Note that we also
@@ -230,3 +241,20 @@
                     (mapc (apply-partially 'add-to-list 'js2-additional-externs)
                           (split-string (if (string-match "/\\* *global *\\(.*?\\) *\\*/" btext)
                                             (match-string-no-properties 1 btext) "") " *, *" t))))))
+
+(require 'org2blog-autoloads)
+(setq org2blog/wp-use-sourcecode-shortcode t)
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "http://kocubinski.wordpress.com/xmlrpc.php"
+         :username "kocubinski"
+         :default-title "Hello World"
+         :default-categories ("emacs")
+         :tags-as-categories nil)))
+
+(add-to-list 'auto-mode-alist '("\\.aspx$" . html-mode))
+(add-to-list 'auto-mode-alist '("\\.ascx$" . html-mode))
+
+(setq org-log-done 'time)
+(setq org-todo-keywords
+      '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "CLOSED")))
