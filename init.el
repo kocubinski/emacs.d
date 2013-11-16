@@ -56,7 +56,7 @@
 (require 'slime-js)
 (require 'dos)
 (require 'htmlize)
-(slime-setup '(slime-js))
+(require 'color-theme-solarized)
 
 (autoload 'js2-mode "js2-mode" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
